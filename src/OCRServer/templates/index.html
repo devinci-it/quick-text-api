@@ -1,0 +1,56 @@
+<!-- OCRServer/templates/index.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}OCRServer{% endblock %}
+
+{% block content %}
+   <div class="status">
+
+
+
+       <h2 class="title-small-text">Server Status</h2>
+       <div class="{{indicator}} dot"></div>
+
+       <table>
+
+           <tr>
+               <td><p id="current-date-time" class="caption-text"></p></td>
+
+           </tr>
+           <td>
+                     <p class="caption-text">
+                    {{ current_date }}
+               </p>
+           </td>
+
+           <tr>
+               <td class="caption-text">STATUS</td>
+               <td class="caption-text">{{ status }}</td>
+                    <td class="caption-text">Uptime</td>
+                  <td class="caption-text">{{ uptime }} seconds</td>
+           </tr>
+
+           <tr>
+                  <td class="caption-text">Processed Requests</td>
+                    <td class="caption-text">{{ processed_requests }}</td>
+           </tr>
+
+       </table>
+   </div>
+
+   <div class="logs" style="background-color: {% for log_color in log_colors %}{{ log_color }},{% endfor %};">
+       <h2 class="title-small-text">Server Logs</h2>
+       <ul>
+
+     {% if log_entries %}
+        {% for log_entry in log_entries %}
+            <p class="caption-text">{{ log_entry }}</p>
+        {% endfor %}
+    {% else %}
+        <p class="caption-text gray">No log entries available.</p>
+    {% endif %}
+
+       </ul>
+   </div>
+{% endblock %}
